@@ -1,7 +1,10 @@
 import useTheme from "../hooks/useTheme";
+import { useContext } from "react";
+import {ThemeContext} from "../contexts/ThemeContext";
 
-function FooterBar({theme}) {
+function FooterBar() {
 
+    const {theme} = useContext(ThemeContext);
     return (
         <footer
             className={`footer ${

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useFetch from "../hooks/useFetch";
 import SongCard from "./SongCard";
 
-function SongList({theme}){
+function SongList(){
    
     const [songs, isError, isLoading] = useFetch("https://sandbox.academiadevelopers.com/harmonyhub/songs/");
     
@@ -17,7 +17,7 @@ function SongList({theme}){
             <div className="columns is-multiline">
                 {songs.map((song) => (
                     <div key={song.id} className="column is-two-thirds">
-                        <SongCard song={song} theme={theme}/>
+                        <SongCard song={song}/>
                     </div>
                 ))}
             </div>

@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
-function SongCard({ song, theme }) {
+function SongCard({ song}) {
+
+    const {theme} = useContext(ThemeContext);
+
     return (
         <div className={`card ${
             theme === "light"
