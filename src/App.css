@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.has-background-light{
+  background-color: aliceblue;
+}
+.has-text-black{
+  color: #242424;
+}
+
+.has-background-black{
+  background-color: #242424;
+}
+
+.has-text-light{
+  color: aliceblue;
+}
+
