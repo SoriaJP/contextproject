@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useFetch(url, options = {}, errorMesagge="Error al leer la petición"){
+function useFetch(url, options = {}, lanzador=false, errorMesagge="Error al leer la petición"){
 
     const [data, setData] = useState(null);
     const [isError, setIsError] = useState(false);
@@ -10,10 +10,11 @@ function useFetch(url, options = {}, errorMesagge="Error al leer la petición"){
         setData(null);
         setIsError(false);
         setIsLoanding(true);
-
-        fetch(url, {...options})
+        if (lanzador){
+            fetch(url, {...options})
             .then((response)=>{
                 if (response.ok){ return response.json();}
+                throw Error("Error al relizar la petición");
             })
             .then((data)=>{
                 setData(data);
@@ -24,8 +25,9 @@ function useFetch(url, options = {}, errorMesagge="Error al leer la petición"){
             .finally(()=>{
                 setIsLoanding(false);
             })
+        }
 
-    },[url])
+    },[url,lanzador])
 
     return [data,isError,isLoanding];
 }
