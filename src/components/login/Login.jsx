@@ -10,29 +10,31 @@ export default function Login(){
     const [password, setPassword] = useState("");
     const [lanzador, setLanzador] = useState(false);
 
-    const {data, isError, isLoading} = useFetch("https://sandbox.academiadevelopers.com/api-auth/",{
-        method: "POST",
-        headers:{
-            "Content-Type":"application/json",
-        },
-        body:JSON.stringify({username,password}),    
-    },lanzador);   
+    const {data, isError, isLoading} = useFetch(
+        "https://sandbox.academiadevelopers.com/api-auth/",
+        {
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify({username,password}),    
+        },lanzador
+    );   
 
     const {login} = useAuth("actions");
 
-    const handleSubmit = (event)=>{
+    function handleSubmit(event){
         event.preventDefault();
         setLanzador(true);
     }
 
-    const handleChange = (event)=>{
+    function handleChange(event){
         const {name, value} = event.target;
         if(name==="username") setUsername(value);
         if(name==="password") setPassword(value);
     }
 
     useEffect(()=>{
-        console.log(data);
         if (data && !isError && lanzador){
            login();
         }
