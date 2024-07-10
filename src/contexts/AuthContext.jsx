@@ -1,55 +1,56 @@
 import { createContext, useReducer, useContext } from "react";
 
-const AuthContext = createContext({
-    state: null,
-    actions: null,
-});
+const AuthContext = createContext(
+    {
+        state: null,
+        actions: null
+    }
+);
 
-const ACTIONS = {
+
+const ACTIONS ={
     LOGIN: "LOGIN",
-    LOGOUT: "LOGOUT",
+    LOGOUT: "LOGOUT"
 };
 
-function reducer(state, action) {
-    switch (action.type) {
+function reducer(state, action){
+    switch(action.type){
         case ACTIONS.LOGIN:
-            return {
-                ...state,
-                isAuthenticated: true,
-            };
+            return({
+                isAuthenticated: true
+            });
         case ACTIONS.LOGOUT:
-            return {
-                ...state,
-                isAuthenticated: false,
-            };
+            return({
+                isAuthenticated: false
+            });
         default:
             return state;
     }
 }
 
-function AuthProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, {
-        isAuthenticated: false,
+function AuthProvider({children}){
+    const [state, dispatch] = useReducer(reducer,{
+       isAuthenticated: false 
     });
 
     const actions = {
-        login: () => dispatch({ type: ACTIONS.LOGIN }),
-        logout: () => dispatch({ type: ACTIONS.LOGOUT }),
-    };
+        login: ()=>dispatch({type:ACTIONS.LOGIN}),
+        logout: ()=>dispatch({type:ACTIONS.LOGIN})
+    }
 
-    return (
-        <AuthContext.Provider value={{ state, actions }}>
+    return(
+        <AuthContext.Provider value={{state,actions}}>
             {children}
         </AuthContext.Provider>
     );
-}
+};
 
-function useAuth(type) {
+function useAuth(type){
     const context = useContext(AuthContext);
-    if (context === undefined) {
-        throw new Error("useAuth must be used within an AuthProvider");
+    if (context === undefined){
+        throw new Error("useAuth must be used within an AuthProvider")
     }
     return context[type];
 }
 
-export { AuthContext, AuthProvider, useAuth };
+export {AuthContext, AuthProvider, useAuth}
